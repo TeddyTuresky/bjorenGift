@@ -1,0 +1,37 @@
+#!/bin/bash
+
+dir=~/Dropbox/scripts/shell
+al=bjorAl
+sm=bjorSm
+
+x=$(( ( RANDOM % 2 )  + 0 ))
+
+
+if [ $x == 0 ]; then
+	n=(`cat $dir/$al`)
+	o=(`cat $dir/$sm`)
+	long=`wc -l < $dir/$sm`
+	li2=(`grep -n "Canz" $al | cut -f 1 -d ':'`)
+	mi1=(`grep -n "Dad’s" $sm | cut -f 1 -d ':'`)
+	mi2=(`grep -n "Canz" $sm | cut -f 1 -d ':'`)
+else
+	n=(`cat $dir/$sm`)
+        o=(`cat $dir/$al`)
+        long=`wc -l < $dir/$al`
+	li2=(`grep -n "Canz" $sm | cut -f 1 -d ':'`)
+        mi1=(`grep -n "Dad’s" $al | cut -f 1 -d ':'`)
+	mi2=(`grep -n "Canz" $al | cut -f 1 -d ':'`)
+fi
+
+
+a=$(( ( RANDOM % ${li2} )  + 0 ))
+echo ${n[a]}
+#say -v Whisper ${n[a]}
+b=$(( ( RANDOM % (${long}+1) )  + 0 ))
+if [ $b -lt $mi1 ] || [ $b -ge $mi2 ]; then
+        echo ${o[b]}; #say ${o[b]}
+else
+        b=$(( ( RANDOM % ${mi1} ) + 0 ));
+        echo ${o[b]}; #say ${o[b]}
+fi
+
